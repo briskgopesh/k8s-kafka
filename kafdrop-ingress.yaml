@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+  labels:
+    cattle.io/creator: norman
+  name: kafdrop
+  namespace: elastic-system
+spec:
+  rules:
+  - host: kafdrop.com
+    http:
+      paths:
+      - backend:
+          serviceName: ingress-a0f74272557928732a9abd5b2733f84f
+          servicePort: 9000
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - kafdrop.com
+    secretName: kafdrop-com
